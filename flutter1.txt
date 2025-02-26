@@ -1,0 +1,346 @@
+Container:-
+
+import 'package:flutter/material.dart';
+void main() {
+ runApp(MaterialApp(
+   home: first(),
+ ));
+}
+class first extends StatelessWidget {
+ const first({super.key});
+ @override
+ Widget build(BuildContext context) {
+   return Scaffold(
+     body: Container(
+         color: Colors.blue,
+         margin: EdgeInsets.all(60),
+         padding: EdgeInsets.all(50),
+         child: Container(
+           margin: EdgeInsets.all(40),
+           padding: EdgeInsets.all(50),
+           color: Colors.red,
+           child: Image.asset("assets/1.png"),
+         )),
+     floatingActionButton: FloatingActionButton(
+       child: Icon(Icons.account_box),
+       onPressed: () {},
+     ),
+     appBar: AppBar(
+       backgroundColor: Colors.red,
+       centerTitle: true,
+       title: Text("Agri-Chain"),
+     ),
+   );
+ }
+}
+
+
+
+
+
+
+
+
+
+Controller:-
+
+class first extends StatelessWidget {
+ first({super.key});
+ TextEditingController txtUserNm = new TextEditingController();
+ @override
+ Widget build(BuildContext context) {
+   return Scaffold(
+     body: TextField(
+       controller: txtUserNm,
+       decoration: InputDecoration(
+           icon: Icon(Icons.icecream), labelText: "Enter Name"),
+     ),
+     floatingActionButton: FloatingActionButton(
+       onPressed: () {
+         print(txtUserNm.text);
+       },
+     ),
+     appBar: AppBar(
+       backgroundColor: Colors.red,
+       title: Text("Container"),
+       centerTitle: true,
+     ),
+   );
+ }
+
+
+
+
+
+odd/even
+prime/notprime
+
+class first extends StatelessWidget {
+ first({super.key});
+ TextEditingController txtUserNm = new TextEditingController();
+ @override
+ Widget build(BuildContext context) {
+   return Scaffold(
+     body: TextField(
+       controller: txtUserNm,
+       decoration: InputDecoration(
+           focusColor: Colors.pink,
+           icon: Icon(Icons.icecream),
+           labelText: "Enter Name"),
+     ),
+     floatingActionButton: FloatingActionButton(
+       child: Icon(Icons.account_box),
+       onPressed: () {
+         print(txtUserNm.text);
+         int no = int.parse(txtUserNm.text);
+         if (no % 2 == 0) {
+           print("No: " + no.toString() + "is even");
+         }
+         {
+           print("No: " + no.toString() + "is odd");
+         }
+         int totalFactors = 0;
+         for (int cntr = 1; cntr <= no; cntr++) {
+           if (no % cntr == 0) {
+             print(cntr);
+           }
+         }
+         if (totalFactors == 2) {
+           print("No is prime");
+         } else {
+           print("No is not prime");
+         }
+       },
+     ),
+     appBar: AppBar(
+       backgroundColor: Colors.red,
+       title: Text("Container"),
+       centerTitle: true,
+     ),
+   );
+ }
+}
+
+LOGIN:-
+import 'package:flutter/material.dart';
+void main() {
+ runApp(MaterialApp(
+   home: first(),
+ ));
+}
+class first extends StatelessWidget {
+ const first({super.key});
+ @override
+ Widget build(BuildContext context) {
+   return Scaffold(
+     body: Container(
+       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+       child: Column(children: [
+         Image.asset('assets/2.jpg'),
+         TextField(
+           decoration: InputDecoration(
+               border:
+                   OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+               icon: Icon(Icons.account_box),
+               labelText: "USER NAME :"),
+         ),
+         SizedBox(
+           height: 10,
+         ),
+         TextField(
+           decoration: InputDecoration(
+               border:
+                   OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+               icon: Icon(Icons.remove_red_eye_outlined),
+               labelText: "PASSWORD:"),
+         ),
+         SizedBox(
+           height: 40,
+         ),
+         ElevatedButton.icon(onPressed: () {}, icon:Icon(Icons.upload), label: Text("SUBMIT")),
+         Spacer(),
+         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+           ElevatedButton.icon(onPressed: () {
+           }, icon:Icon(Icons.assignment_ind_rounded), label: Text("SIGN UP")),
+           ElevatedButton.icon(onPressed: () {
+           }, icon:Icon(Icons.password), label: Text("FORGOT PASSWORD"))
+         ]),
+       ]),
+     ),
+     appBar: AppBar(
+       backgroundColor: Colors.red,
+       centerTitle: true,
+       title: Text("Agri-Chain"),
+     ),
+   );
+ }
+}
+			CALCULATOR WITH STSTEFUL
+
+import 'package:flutter/material.dart';
+void main() {
+ runApp(MaterialApp(
+   home: second(),
+ ));
+}
+class second extends StatefulWidget {
+ const second({super.key});
+ @override
+ State<second> createState() => _secondState();
+}
+class _secondState extends State<second> {
+ TextEditingController txt1 = new TextEditingController();
+ TextEditingController txt2 = new TextEditingController();
+ var k = "";
+ @override
+ Widget build(BuildContext context) {
+   return Scaffold(
+     body: Container(
+         margin: EdgeInsets.all(50),
+         child: Column(
+           children: [
+             TextField(
+               controller: txt1,
+               decoration: InputDecoration(
+                   hintText: "Enter No",
+                   border: OutlineInputBorder(
+                       borderRadius: BorderRadius.circular(20))),
+             ),
+             SizedBox(
+               height: 10,
+             ),
+             TextField(
+               controller: txt2,
+               decoration: InputDecoration(
+                   hintText: "Enter No",
+                   border: OutlineInputBorder(
+                       borderRadius: BorderRadius.circular(20))),
+             ),
+             SizedBox(
+               height: 10,
+             ),
+             Row(
+               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+               children: [
+                 ElevatedButton(onPressed: () {
+                   setState(() {
+                     var l = int.parse(txt1.text) + int.parse(txt2.text);
+                     k = l.toString();
+                   });
+                 }, child: Text("+")),
+                 ElevatedButton(onPressed: () {
+                   setState(() {
+                     var l = int.parse(txt1.text) - int.parse(txt2.text);
+                     k = l.toString();
+                   });
+                 }, child: Text("-")),
+                 ElevatedButton(onPressed: () {
+                   setState(() {
+                     var l = int.parse(txt1.text) * int.parse(txt2.text);
+                     k = l.toString();
+                   });
+                 }, child: Text("*")),
+                 ElevatedButton(onPressed: () {
+                   setState(() {
+                     var l = int.parse(txt1.text) / int.parse(txt2.text);
+                     k = l.toString();
+                   });
+                 }, child: Text("/"))
+               ],
+             ), Text(k.isEmpty ? "empty" : k.toString())
+           ],
+         )),
+     appBar: AppBar(centerTitle: true, title: Text("CALCULATOR")),
+   );
+ }
+}
+
+		
+
+List
+
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+class second extends StatefulWidget {
+ const second({super.key});
+ @override
+ State<second> createState() => _secondState();
+}
+class _secondState extends State<second> {
+ TextEditingController text1 = new TextEditingController();
+ TextEditingController search = new TextEditingController();
+ var l='';
+ List<int> mark = [];
+
+ @override
+ Widget build(BuildContext context) {
+   return Scaffold(
+     body: Center(
+       child: Column(
+         children: [
+           TextField(
+             controller: text1,
+             decoration: InputDecoration(
+                 enabledBorder:
+                     OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                 hintText: "Enter No :",
+                 border: OutlineInputBorder(
+                     borderRadius: BorderRadius.circular(20))),
+           ),
+           SizedBox(
+             height: 10,
+           ),
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceAround,
+             children: [
+               ElevatedButton(
+                   style:
+                       ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                   onPressed: () {
+                     mark.add(int.parse(text1.text));
+                     text1.clear();
+                     // mark.length;
+                     setState(() {});
+                   },
+                   child: Text("Add")),
+               Text("Size of list :"+mark.length.toString(),style:  TextStyle(color: Colors.pink, fontSize: 30), )
+             ],
+           ),SizedBox(height: 20,),
+           TextField(
+             controller: search,
+             decoration: InputDecoration(
+                 enabledBorder:
+                 OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                 hintText: "Enter Search Index :",
+                 border: OutlineInputBorder(
+                     borderRadius: BorderRadius.circular(20))),
+           ),
+           SizedBox(
+             height: 10,
+           ),
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceAround,
+             children: [
+               ElevatedButton(
+                   style:
+                   ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                   onPressed: () {
+                     setState(() {
+                       var h=mark.elementAt(int.parse(search.text));
+                       l=h.toString();
+                       // print(h.toString());
+                     });
+                   },
+                   child: Text("Add")),
+               Text("MARK = :"+l.toString(),style:  TextStyle(color: Colors.pink, fontSize: 30), )
+             ],
+           )
+         ],
+       ),
+     ),
+   );
+ }
+}
+
+
