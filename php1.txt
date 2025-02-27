@@ -1,0 +1,421 @@
+			1  student registration form
+
+1-> php artisan make:controller StudentController
+2,3-> welcome.blade.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Student Registration</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   <div class="container mt-5">
+       <h2>Student Registration Form</h2>
+
+
+       @if(session('success'))
+           <div class="alert alert-success">
+               {{ session('success') }}
+           </div>
+       @endif
+
+
+       <form action="{{ route('submit_form') }}" method="POST">
+           @csrf
+           <div class="form-group">
+               <label for="fullname">Full Name:</label>
+               <input type="text" class="form-control" id="fullname" name="fullname" required>
+           </div>
+           <div class="form-group">
+               <label for="email">Email:</label>
+               <input type="email" class="form-control" id="email" name="email" required>
+           </div>
+           <div class="form-group">
+               <label for="phone">Phone:</label>
+               <input type="text" class="form-control" id="phone" name="phone" maxlength=10 required>
+           </div>
+           <div class="form-group">
+               <label for="course">Course:</label>
+               <input type="text" class="form-control" id="course" name="course" required>
+           </div>
+           <button type="submit" class="btn btn-primary">Register</button>
+       </form>
+      
+   </div>
+</body>
+</html>
+
+
+
+4->submit.blade.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Student Registration</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   <div class="container mt-5">
+       <h1 class="text-center mb-4">Checkout Summary</h1>
+   <table class="table table-bordered table-striped">
+   <thead>
+      <tr>
+          <th>Attribute</th>
+          <th>Value</th>
+      </tr>
+   </thead>
+   <tbody>
+      @foreach ($data as $key => $value)
+          <tr>
+              <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
+              <td>{{ $value }}</td>
+          </tr>
+      @endforeach
+   </tbody>
+   </div>
+</body>
+</html>
+
+
+
+Web.php
+<?php
+
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
+
+
+Route::get('/', [StudentController::class, 'welcome'])->name('welcome');
+Route::post('/submit', [StudentController::class, 'submit_form'])->name('submit_form');
+
+StudentController.php
+<?php
+
+
+namespace App\Http\Controllers;
+
+
+use Illuminate\Http\Request;
+
+
+class StudentController extends Controller
+{
+   public function welcome()
+   {
+       return view('welcome');
+   }
+   public function submit_form(Request $request)
+   {
+       $data = $request->all();
+       return view('submit',compact('data'));
+   }
+}
+
+
+
+
+SET :2
+
+1-> php artisan make:controller ProductController
+2,3->welcom.blade.php
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management System</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+      <h2>Product Management System</h2>
+
+
+
+
+      @if(session('success'))
+          <div class="alert alert-success">
+              {{ session('success') }}
+          </div>
+      @endif
+
+
+
+
+      <form action="{{ route('submit_form') }}" method="POST">
+          @csrf
+          <div class="form-group">
+              <label for="productname">Product Name:</label>
+              <input type="text" class="form-control" id="productname" name="productname" required>
+          </div>
+          <div class="form-group">
+              <label for="category">Category:</label>
+              <input type="category" class="form-control" id="category" name="category" required>
+          </div>
+          <div class="form-group">
+              <label for="price">Price:</label>
+              <input type="text" class="form-control" id="price" name="price" min="0" required>
+          </div>
+          <div class="form-group">
+              <label for="sq">Stock Qty:</label>
+              <input type="text" class="form-control" id="sq" name="sq" maxlength=1 required>
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+4->submit.blade.php
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management System</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+      <h1 class="text-center mb-4">Checkout Summary</h1>
+  <table class="table table-bordered table-striped">
+  <thead>
+     <tr>
+         <th>Attribute</th>
+         <th>Value</th>
+     </tr>
+  </thead>
+  <tbody>
+     @foreach ($data as $key => $value)
+         <tr>
+             <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
+             <td>{{ $value }}</td>
+         </tr>
+     @endforeach
+  </tbody>
+  </div>
+</body>
+</html>
+
+
+
+
+Web.php
+
+<?php
+
+
+
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+
+
+
+
+Route::get('/', [ProductController::class, 'welcome'])->name('welcome');
+Route::post('/submit', [ProductController::class, 'submit_form'])->name('submit_form');
+
+
+
+
+
+Productcontroller.php
+
+<?php
+
+
+
+
+namespace App\Http\Controllers;
+
+
+
+
+use Illuminate\Http\Request;
+
+
+
+
+class ProductController extends Controller
+{
+  public function welcome()
+  {
+      return view('welcome');
+  }
+  public function submit_form(Request $request)
+  {
+      $data = $request->all();
+      return view('submit',compact('data'));
+  }
+}
+
+
+
+SET :3
+
+1-> php artisan make:controller JobapplicationController
+
+2,3->welcome.blade.php
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+      <h2>Job Application form</h2>
+
+
+
+
+      @if(session('success'))
+          <div class="alert alert-success">
+              {{ session('success') }}
+          </div>
+      @endif
+
+
+
+
+      <form action="{{ route('submit_form') }}" method="POST">
+          @csrf
+          <div class="form-group">
+              <label for="fullname">Full Name:</label>
+              <input type="text" class="form-control" id="fullname" name="fullname" required>
+          </div>
+          <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input type="text" class="form-control" id="phone" name="phone" maxlength=10 required>
+          </div>
+          <div class="form-group">
+              <label for="position">Position:</label>
+              <input type="text" class="form-control" id="position" name="position" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    
+  </div>
+</body>
+</html>
+
+
+
+
+4->submit.blade.php
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobapplicationController</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+      <h1 class="text-center mb-4">Checkout Summary</h1>
+  <table class="table table-bordered table-striped">
+  <thead>
+     <tr>
+         <th>Attribute</th>
+         <th>Value</th>
+     </tr>
+  </thead>
+  <tbody>
+     @foreach ($data as $key => $value)
+         <tr>
+             <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
+             <td>{{ $value }}</td>
+         </tr>
+     @endforeach
+  </tbody>
+  </div>
+</body>
+</html>
+
+
+
+
+5-> web.php
+
+<?php
+
+
+
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobapplicationController;
+
+
+
+
+Route::get('/', [JobapplicationController::class, 'welcome'])->name('welcome');
+Route::post('/submit', [JobapplicationController::class, 'submit_form'])->name('submit_form');
+
+
+
+
+
+6->JobapplicationController
+
+<?php
+
+
+
+
+namespace App\Http\Controllers;
+
+
+
+
+use Illuminate\Http\Request;
+
+
+
+
+class JobapplicationController extends Controller
+{
+  public function welcome()
+  {
+      return view('welcome');
+  }
+  public function submit_form(Request $request)
+  {
+      $data = $request->all();
+      return view('submit',compact('data'));
+  }
+}
+
+
+
+
+SET : 4
+1-> php artisan make:controller LibraryController
+
+2,3->welcome.blade.php
+
+
+
